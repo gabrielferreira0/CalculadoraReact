@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Calculator from './Main/Calculator';
 import './index.css'
-import reportWebVitals from './reportWebVitals';
+
 
 ReactDOM.render(
     <React.StrictMode>
@@ -12,4 +12,4 @@ ReactDOM.render(
     document.getElementById('root')
 );
 
-reportWebVitals();
+
