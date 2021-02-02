@@ -3,8 +3,17 @@ import './Calculator.css'
 import Button from "../components/Button"
 import Display from "../components/Display"
 
-export default class Calculator extends Component {
 
+const initialState = {
+    displayValue: '0',
+    clearDisplay: 'false',
+    operation: null,
+    values: [0, 0],
+    current: 0
+}
+
+export default class Calculator extends Component {
+    state = {...initialState}
 
     constructor(props) {
         super(props);
@@ -14,7 +23,8 @@ export default class Calculator extends Component {
     }
 
     clearMemory() {
-        console.log('limpar')
+        //console.log('limpar')
+        this.setState({initialState})
     }
 
     setOperation(operation) {
@@ -22,13 +32,21 @@ export default class Calculator extends Component {
     }
 
     addDigit(n) {
-        console.log(n)
+        //console.log(n);
+        if (n === '.' && this.state.displayValue.includes('.')) {
+            return
+        }
+        const clearDisplay = this.state.displayValue === '0'
+            || this.state.clearDisplay
+        const currentValue = clearDisplay ? '' : this.state.displayValue
+        const displayValue = currentValue + n
+        this.setState({displayValue, clearDisplay: false})
     }
 
     render() {
         return (
             <div className='calculator'>
-                <Display value={1500}/>
+                <Display value={this.state.displayValue}/>
                 <Button label='AC' click={this.clearMemory} triple/>
                 <Button label='/' click={this.setOperation} operation/>
                 <Button label='7' click={this.addDigit}/>
